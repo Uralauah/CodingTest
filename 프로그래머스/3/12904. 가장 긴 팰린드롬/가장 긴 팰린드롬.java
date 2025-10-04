@@ -1,39 +1,46 @@
+import java.util.*;
+
 class Solution
 {
     public int solution(String s)
     {
-        int answer = 1;
-
-        int len = s.length();
-        
-        for(int i=1;i<len-1;i++){
-            int j=0;
-            // System.out.println("start: "+s.charAt(i));
-            boolean flag = false;
-            while(i-j>=0 && i+j<len){
-                
-                // System.out.println(s.charAt(i-j) +" "+s.charAt(i+j));
-                if(s.charAt(i-j) != s.charAt(i+j)){
-                    // System.out.println("wrong!");
-                    break;
-                }    
-                j++;
-            }
-            answer = Math.max(answer, 1+((j-1)*2));
+        if(s.length()<=1){
+            return s.length();
         }
+        int answer = 0;
+        int len = s.length();
+        StringBuilder sb = new StringBuilder(len*2+3);
         
-        for(int i=0;i<len-1;i++){
-            int j=0;
-            while(i-j>=0 && i+j+1<len){
-                // System.out.println(s.charAt(i-j) +" "+s.charAt(i+j+1)+" : "+(i-j)+" "+(i+j+1));
-                
-                if(s.charAt(i-j) != s.charAt(i+j+1)){
-                    // System.out.println("wrong!");
-                    break;
-                }
-                j++;
+        sb.append("*");
+        for(int i=0;i<len;i++){
+            sb.append("#").append(s.charAt(i));
+        }
+        sb.append("#").append("@");
+        
+        char[] T = sb.toString().toCharArray();
+        int tLen = T.length;
+        
+        int[] P = new int[tLen];
+        int center = 0;
+        int right = 0;
+        
+        for(int i=1;i<tLen-1;i++){
+            int mirror = 2*center-i;
+            
+            if(i<right)
+                P[i] = Math.min(right-i, P[mirror]);
+            else
+                P[i] = 0;
+            
+            while(T[i-1-P[i]] == T[i+1+P[i]])
+                P[i]++;
+            
+            if(i+P[i]>right){
+                center = i;
+                right = i+P[i];
             }
-            answer = Math.max(answer, j*2);
+            
+            answer = Math.max(answer, P[i]);
         }
 
         return answer;
