@@ -2,21 +2,6 @@ import java.util.*;
 
 class Solution {
     public List<Integer>[] arr;
-//     public int dest;
-    
-//     public bfs(int now){
-        
-//     }
-    
-    public class Node{
-        public int num;
-        public int distance;
-        
-        public Node(int num, int distance){
-            this.num = num;
-            this.distance = distance;
-        }
-    }
     
     public int[] solution(int n, int[][] roads, int[] sources, int destination) {
         int[] dist = new int[n+1];
@@ -30,21 +15,18 @@ class Solution {
             arr[roads[i][1]].add(roads[i][0]);
         }
         
-        // boolean[] visited = new boolean[n+1];
-        // visited[destination] = true;
         Arrays.fill(dist,-1);
         dist[destination] = 0;
-        Queue<Node> q = new LinkedList<>();
-        q.add(new Node(destination, 0));
+        Queue<Integer> q = new LinkedList<>();
+        q.add(destination);
         
         while(q.size()!=0){
-            Node now = q.poll();
-            int sum = now.distance;
-            for(int next : arr[now.num]){
+            int now = q.poll();
+            for(int next : arr[now]){
                 if(dist[next]!=-1)
                     continue;
-                q.add(new Node(next, sum+1));
-                dist[next] = sum+1;
+                q.add(next);
+                dist[next] = dist[now]+1;
             }
         }
         
