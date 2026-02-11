@@ -6,37 +6,26 @@ import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class Main {
-	public static class Data {
-		int num;
-		String op;
+	public static int[] parent;
+	public static char[] how;
+	public static char[] operation = { 'D', 'S', 'L', 'R' };
 
-		public Data(int num, String op) {
-			this.num = num;
-			this.op = op;
-		}
-	}
-
-	public static Data cal(int num, String op, int opIdx) {
-		Data data = new Data(num, op);
+	public static int cal(int num, int opIdx) {
 		switch (opIdx) {
 		case 0:
-			data.num = (data.num * 2) % 10000;
-			data.op += "D";
+			num = (num * 2) % 10000;
 			break;
 		case 1:
-			data.num = data.num - 1 == -1 ? 9999 : data.num - 1;
-			data.op += "S";
+			num = num - 1 == -1 ? 9999 : num - 1;
 			break;
 		case 2:
-			data.num = (data.num * 10) % 10000 + data.num / 1000;
-			data.op += "L";
+			num = (num * 10) % 10000 + num / 1000;
 			break;
 		case 3:
-			data.num = data.num / 10 + data.num % 10 * 1000;
-			data.op += "R";
+			num = num / 10 + num % 10 * 1000;
 			break;
 		}
-		return data;
+		return num;
 	}
 
 	public static void main(String[] args) throws IOException {
@@ -44,35 +33,51 @@ public class Main {
 
 		int T = Integer.parseInt(br.readLine());
 		StringTokenizer st;
-		
+		StringBuilder sb = new StringBuilder();
+
 		for (int t = 0; t < T; t++) {
 			boolean[] visited = new boolean[10000];
-			Queue<Data> q = new ArrayDeque<>();
+			parent = new int[10000];
+			how = new char[10000];
+
+			Queue<Integer> q = new ArrayDeque<>();
 			st = new StringTokenizer(br.readLine());
 			int A = Integer.parseInt(st.nextToken());
 			int B = Integer.parseInt(st.nextToken());
 
-			q.add(new Data(A, ""));
-			boolean flag = false;
-
+			q.add(A);
+			visited[A] = true;
 			while (!q.isEmpty()) {
-				Data data = q.poll();
-				if (flag)
+				Integer num = q.poll();
+
+				if (num == B)
 					break;
 
 				for (int i = 0; i < 4; i++) {
-					Data newData = cal(data.num, data.op, i);
-					if (newData.num == B) {
-						System.out.println(newData.op);
-						flag = true;
+					int newNum = cal(num, i);
+
+					if (visited[newNum])
+						continue;
+					q.add(newNum);
+					visited[newNum] = true;
+					parent[newNum] = num;
+					how[newNum] = operation[i];
+					
+					if(newNum==B) {
+						q.clear();
 						break;
 					}
-					if(visited[newData.num])
-						continue;
-					q.add(newData);
-					visited[newData.num] = true;
 				}
 			}
+
+			int temp = B;
+			StringBuilder buff = new StringBuilder();
+			while (temp != A) {
+				buff.append(how[temp]);
+				temp = parent[temp];
+			}
+			sb.append(buff.reverse()).append("\n");
 		}
+		System.out.println(sb);
 	}
 }
