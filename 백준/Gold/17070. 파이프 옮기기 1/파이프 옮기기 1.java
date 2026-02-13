@@ -59,42 +59,34 @@ public class Main {
 			map[n + 1][i] = 1;
 		}
 
-		Queue<int[]> q = new ArrayDeque<>();
-		q.add(new int[] { 1, 2, 1 });
+		int[][][] dp = new int[3][n + 2][n + 2];
 
-		int ans = 0;
-		while (!q.isEmpty()) {
-			int[] now = q.poll();
-			int x = now[0];
-			int y = now[1];
-			if(x==n && y==n) {
-				ans++;
-				continue;
-			}
-			switch(now[2]) {
-			case 1:
-				if(check(x,y,1,1))
-					q.add(new int[] {x,y+1,1});
-				if(check(x,y,1,3))
-					q.add(new int[] {x+1,y+1,3});
-				break;
-			case 2:
-				if(check(x,y,2,2))
-					q.add(new int[] {x+1,y,2});
-				if(check(x,y,2,3))
-					q.add(new int[] {x+1,y+1,3});
-				break;
-			case 3:
-				if(check(x,y,3,1))
-					q.add(new int[] {x,y+1,1});
-				if(check(x,y,3,2))
-					q.add(new int[] {x+1,y,2});
-				if(check(x,y,3,3))
-					q.add(new int[] {x+1,y+1,3});
-				break;
+		dp[0][1][2] = 1;
+		for (int i = 1; i <= n; i++) {
+			for (int j = 1; j <= n; j++) {
+				if (dp[0][i][j] > 0) {
+					if (check(i, j, 1, 1))
+						dp[0][i][j + 1] += dp[0][i][j];
+					if (check(i, j, 1, 3))
+						dp[2][i + 1][j + 1] += dp[0][i][j];
+				}
+				if (dp[1][i][j] > 0) {
+					if (check(i, j, 2, 2))
+						dp[1][i + 1][j] += dp[1][i][j];
+					if (check(i, j, 2, 3))
+						dp[2][i + 1][j + 1] += dp[1][i][j];
+				}
+				if(dp[2][i][j]>0) {
+					if(check(i,j,3,1))
+						dp[0][i][j+1]+=dp[2][i][j];
+					if(check(i,j,3,2))
+						dp[1][i+1][j]+=dp[2][i][j];
+					if(check(i,j,3,3))
+						dp[2][i+1][j+1]+=dp[2][i][j];
+				}
 			}
 		}
-		
-		System.out.println(ans);
+
+		System.out.println(dp[0][n][n]+dp[1][n][n]+dp[2][n][n]);
 	}
 }
