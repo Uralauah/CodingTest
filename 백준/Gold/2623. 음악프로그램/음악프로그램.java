@@ -38,11 +38,11 @@ public class Main {
 		}
 		
 		StringBuilder sb = new StringBuilder();
-		Set<Integer> s = new HashSet<>();
+		int count = 0;
 		while(!q.isEmpty()) {
 			int now = q.poll();
-			sb.append(now+"\n");
-			s.add(now);
+			sb.append(now).append("\n");
+			count++;
 			
 			for(int i=0;i<arr[now].size();i++) {
 				int next = arr[now].get(i);
@@ -53,7 +53,7 @@ public class Main {
 			}
 		}
 
-		if(s.size()!=n) {
+		if(count!=n) {
 			System.out.println(0);
 			return;
 		}
