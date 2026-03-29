@@ -1,46 +1,35 @@
-import java.io.IOException;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.util.List;
-import java.util.LinkedList;
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.Queue;
+import java.util.StringTokenizer;
 
-public class Main {
+class Main {
     public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader (new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter (new OutputStreamWriter(System.out));
-        List <Integer> list = new LinkedList<>();
-        List <Integer> output = new LinkedList<>();
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
 
-        String text = br.readLine();
-        String[] num = text.split(" ");
-        int n,k;
-        n=Integer.parseInt(num[0]);
-        k=Integer.parseInt(num[1]);
+        int n = Integer.parseInt(st.nextToken());
+        int k = Integer.parseInt(st.nextToken());
 
-        for (int i=1;i<=n;i++)
-            list.add(i);
-        int sum=list.size();
-        for (int i=0;i<n;i++){
-            for (int j=0;j<k;j++){
-                if(sum>=list.size()-1){
-                    sum=0;
-                }
-                else
-                    sum++;
+        Queue<Integer> q = new ArrayDeque<>();
+
+        for (int i = 1; i <= n; i++) {
+            q.add(i);
+        }
+
+        System.out.print("<");
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < k - 1; j++) {
+                q.add(q.poll());
             }
-            output.add(list.get(sum));
-            list.remove(sum);
-            sum--;
-        }
-        System.out.print('<');
-        for (int i=0;i<n;i++){
-            System.out.print(output.get(i));
-            if (i!=n-1)
+            System.out.print(q.poll());
+            if (i != n - 1) {
                 System.out.print(", ");
+            }
         }
-        System.out.println('>');
+        System.out.print(">");
     }
 }
