@@ -20,16 +20,20 @@ class Main {
             q.add(i);
         }
 
-        System.out.print("<");
+        StringBuilder sb = new StringBuilder();
+        sb.append("<");
+        
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < k - 1; j++) {
                 q.add(q.poll());
             }
-            System.out.print(q.poll());
+            sb.append(q.poll());
             if (i != n - 1) {
-                System.out.print(", ");
+                sb.append(", ");
             }
         }
-        System.out.print(">");
+        sb.append(">");
+
+        System.out.println(sb);
     }
 }
