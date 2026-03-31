@@ -12,8 +12,9 @@ public class Main {
 	static List<String> words;
 	
 	static class Node {
-		Map<Character, Node> child = new HashMap<>(); // 이 노드의 자식 노드들 
+		Node[] child = new Node[26]; // 이 노드의 자식 노드들 
 		boolean isEnd; // 이 글자가 한 단어의 끝임을 체크해주는 변수 
+		int childCount; // 자식 노드 개수 
 	}
 	
 	static Node root;
@@ -36,22 +37,25 @@ public class Main {
 			// 사전 정보 입력받기
 			for(int i=0; i<N; i++) {
 				String word = br.readLine(); // hello
+				Node cur = root; // 루트 노드에서 시작 (매 단어마다 root로 초기화 해줘야 한다는 점!)
 				
 				// 단어들 저장해주기 
 				words.add(word); 
-				
-				Node cur = root; // 루트 노드에서 시작 (매 단어마다 root로 초기화 해줘야 한다는 점!)
 				
 				// 트라이에 단어 삽입 
 				for(int j=0; j<word.length(); j++) {
 					
 					char letter = word.charAt(j);
+					int idx = letter - 'a';
 					
 					// 자식 중에 이 노드가 없으면 새로 만들고, 있으면 그대로 쓰기!
-					cur.child.putIfAbsent(letter, new Node());
+					if(cur.child[idx] == null) {
+						cur.child[idx] = new Node(); // 새로 만들기 
+						cur.childCount++; // 자식 노드 수 ++ 
+					}
 					
 					// 해당 노드로 이동 
-					cur = cur.child.get(letter);
+					cur = cur.child[idx];
 				}
 				
 				// 단어 다 삽입했으면 마지막 노드임을 체크 
@@ -84,6 +88,7 @@ public class Main {
 		for(int i=0; i<word.length(); i++) {
 			
 			char letter = word.charAt(i); 
+			int idx = letter - 'a';
 			
 			// 시작할 때 버튼 누르기 
 			if(i == 0) {
@@ -91,17 +96,16 @@ public class Main {
 			}
 			
 			// 이전 노드가 분기할 때 버튼 누르기 (child가 1개보다 많을 때)
-			else if(cur.child.size() > 1) count++;
+			else if(cur.childCount > 1) count++;
 			
 			// 이전 노드가 한 단어의 끝이었을 때 버튼 누르기. <- 그러려면 이 노드가 한 단어의 끝임을 체크해줘야 함 
 			else if(cur.isEnd) count++;
 			
 			// cur 이동
-			cur = cur.child.get(letter);
+			cur = cur.child[idx];
 			
 		}
 		return count;
 	}
-	
 
 }
