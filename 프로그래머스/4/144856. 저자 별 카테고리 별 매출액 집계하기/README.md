@@ -1,10 +1,10 @@
 # [level 4] 저자 별 카테고리 별 매출액 집계하기 - 144856 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/144856) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/144856?language=mysql) 
 
 ### 성능 요약
 
-메모리: 0.0 MB, 시간: 0.00 ms
+메모리: undefined, 시간: 
 
 ### 구분
 
@@ -12,11 +12,11 @@
 
 ### 채점결과
 
-Empty
+합계: 100.0 / 100.0
 
 ### 제출 일자
 
-2025년 02월 21일 13:16:08
+2026년 06월 26일 13:03:47
 
 ### 문제 설명
 
