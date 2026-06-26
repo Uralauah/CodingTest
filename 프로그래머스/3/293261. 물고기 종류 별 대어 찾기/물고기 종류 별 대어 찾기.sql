@@ -1,11 +1,10 @@
--- 코드를 작성해주세요
-select fi.id, fn.fish_name, fi.length
-from (
-    select id, fish_type, length, rank() over
-                                    (partition by fish_type
-                                    order by length desc) as rnk
-    from fish_info) fi
-join fish_name_info fn
-on fi.fish_type = fn.fish_type
-where fi.rnk = 1
-order by fi.id asc;
+select i.id, n.fish_name, i.length
+from fish_info i
+join fish_name_info n
+on i.fish_type = n.fish_type
+where (i.fish_type, i.length) in (
+    select fish_type, max(length)
+    from fish_info
+    group by fish_type
+)
+order by i.id asc
