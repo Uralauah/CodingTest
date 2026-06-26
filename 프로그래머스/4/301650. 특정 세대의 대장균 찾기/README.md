@@ -1,6 +1,6 @@
 # [level 4] 특정 세대의 대장균 찾기 - 301650 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/301650) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/301650?utm_source=chatgpt.com) 
 
 ### 성능 요약
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2026년 06월 26일 12:29:24
+2026년 06월 26일 16:22:41
 
 ### 문제 설명
 
