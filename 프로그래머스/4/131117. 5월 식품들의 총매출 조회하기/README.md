@@ -1,10 +1,10 @@
 # [level 4] 5월 식품들의 총매출 조회하기 - 131117 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/131117) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/131117?utm_source=chatgpt.com) 
 
 ### 성능 요약
 
-메모리: 0.0 MB, 시간: 0.00 ms
+메모리: undefined, 시간: 
 
 ### 구분
 
@@ -12,11 +12,11 @@
 
 ### 채점결과
 
-Empty
+합계: 100.0 / 100.0
 
 ### 제출 일자
 
-2026년 03월 03일 12:02:49
+2026년 06월 26일 15:04:52
 
 ### 문제 설명
 
