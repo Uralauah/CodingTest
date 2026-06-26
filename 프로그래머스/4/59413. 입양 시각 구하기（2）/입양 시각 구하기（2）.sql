@@ -1,11 +1,12 @@
 with recursive hours as(
-    select 0 as hr
+    select 0 as h
     union all
-    select hr + 1 from hours where hr < 23
+    select h + 1 from hours
+    where h < 23
 )
-select h.hr as hour, count(a.datetime) as count
-from hours h
-left join animal_outs a
-on h.hr = hour(a.datetime)
-group by h.hr
-order by h.hr asc
+select hr.h, count(ao.animal_id) as count
+from hours hr
+left join animal_outs ao
+on hr.h = hour(ao.datetime)
+group by hr.h
+order by hr.h
