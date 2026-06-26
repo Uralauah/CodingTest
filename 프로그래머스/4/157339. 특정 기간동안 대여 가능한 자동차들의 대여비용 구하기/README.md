@@ -1,10 +1,10 @@
 # [level 4] 특정 기간동안 대여 가능한 자동차들의 대여비용 구하기 - 157339 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/157339) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/157339?language=mysql) 
 
 ### 성능 요약
 
-메모리: 0.0 MB, 시간: 0.00 ms
+메모리: undefined, 시간: 
 
 ### 구분
 
@@ -12,11 +12,11 @@
 
 ### 채점결과
 
-Empty
+합계: 100.0 / 100.0
 
 ### 제출 일자
 
-2025년 02월 21일 13:43:11
+2026년 06월 26일 15:37:19
 
 ### 문제 설명
 
