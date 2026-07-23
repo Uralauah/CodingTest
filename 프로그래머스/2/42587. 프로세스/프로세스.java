@@ -2,32 +2,36 @@ import java.util.*;
 
 class Solution {
     public int solution(int[] priorities, int location) {
-        int answer = 0;
-        
-        int[] temp = new int[priorities.length];
-        for(int i=0;i<temp.length;i++){
-            temp[i] = priorities[i];
+        Deque<int[]> q = new ArrayDeque<>();
+
+        for (int i = 0; i < priorities.length; i++) {
+            q.offerLast(new int[]{priorities[i], i});
         }
-        Arrays.sort(temp);
-        
-        int p = temp.length-1;
-        int i=0;
-        
-        while(true){
-        
-            if(temp[p]==priorities[i]){
-                // System.out.println(p+" "+i+" "+answer);
-                answer++;
-                p--;
-                priorities[i]=-1;
-                if(location==i){
+
+        int order = 0;
+
+        while (!q.isEmpty()) {
+            int[] current = q.pollFirst();
+            boolean hasHigher = false;
+
+            for (int[] process : q) {
+                if (process[0] > current[0]) {
+                    hasHigher = true;
                     break;
                 }
             }
-            i=(i+1)%priorities.length;
+
+            if (hasHigher) {
+                q.offerLast(current);
+            } else {
+                order++;
+
+                if (current[1] == location) {
+                    return order;
+                }
+            }
         }
-        
-        
-        return answer;
+
+        return -1;
     }
 }
