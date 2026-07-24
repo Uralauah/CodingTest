@@ -1,36 +1,27 @@
-import java.util.*;
-
 class Solution {
     public long solution(int[] sequence) {
         long answer = 0;
-        int len = sequence.length;
-        long[] sum = new long[len+1];
+        int n = sequence.length;
         
-        sum[0] = sequence[0];
-        sum[len] = 0;
-        for(int i=1;i<len;i++){
-            if(i%2==0)
-                sum[i] = sum[i-1]+sequence[i];
-            else
-                sum[i] = sum[i-1]-sequence[i];
+        long[] maxDp = new long[n];
+        long[] minDp = new long[n];
+        
+        maxDp[0] = sequence[0];
+        minDp[0] = sequence[0];
+        
+        long max = maxDp[0];
+        long min = maxDp[0];
+        
+        for(int i=1;i<n;i++){
+            long cur = i%2==0 ? sequence[i] : -sequence[i];
+            
+            maxDp[i] = Math.max(cur, maxDp[i-1] + cur);
+            minDp[i] = Math.min(cur, minDp[i-1] + cur);
+            
+            max = Math.max(max, maxDp[i]);
+            min = Math.min(min, minDp[i]);
         }
         
-//         for(int i=0;i<len;i++){
-//             System.out.print(sum[i]+" ");
-//         }
-        
-        Arrays.sort(sum);
-        answer = sum[len] - sum[0];
-        
-        return answer;
+        return Math.max(max, -min);
     }
 }
-
-/*
-2 -3 -6 -1 3 1 2 -4 
-2 -1 -7 -8 -5 -4 -2 -6
-    
--2 3 6 1 -3 -1 -2 4
--2 1 7 8 5 4 2 6
-    */
-    
