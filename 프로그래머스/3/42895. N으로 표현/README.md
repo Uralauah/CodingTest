@@ -1,10 +1,10 @@
 # [level 3] N으로 표현 - 42895 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/42895) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/42895?utm_source=chatgpt.com) 
 
 ### 성능 요약
 
-메모리: 82.2 MB, 시간: 28.04 ms
+메모리: 89.5 MB, 시간: 12.20 ms
 
 ### 구분
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2025년 10월 07일 13:30:47
+2026년 07월 24일 13:07:16
 
 ### 문제 설명
 
