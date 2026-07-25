@@ -10,6 +10,7 @@ This is a auto push repository for Baekjoon Online Judge created with [BaekjoonH
 ## Dynamic Programming
 |  |
 | ------- |
+| [0416-partition-equal-subset-sum](https://github.com/Uralauah/CodingTest/tree/master/0416-partition-equal-subset-sum) |
 | [0464-can-i-win](https://github.com/Uralauah/CodingTest/tree/master/0464-can-i-win) |
 ## Bit Manipulation
 |  |
@@ -27,4 +28,8 @@ This is a auto push repository for Baekjoon Online Judge created with [BaekjoonH
 |  |
 | ------- |
 | [0464-can-i-win](https://github.com/Uralauah/CodingTest/tree/master/0464-can-i-win) |
+## Array
+|  |
+| ------- |
+| [0416-partition-equal-subset-sum](https://github.com/Uralauah/CodingTest/tree/master/0416-partition-equal-subset-sum) |
 <!---LeetCode Topics End-->
