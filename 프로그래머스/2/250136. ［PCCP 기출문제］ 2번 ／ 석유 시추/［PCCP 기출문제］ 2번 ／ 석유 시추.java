@@ -1,54 +1,58 @@
 import java.util.*;
 
 class Solution {
+    public int[][] dir = {{0,1},{0,-1},{1,0},{-1,0}};
+    
     public int solution(int[][] land) {
         int answer = 0;
         int n = land.length;
         int m = land[0].length;
-        int[] sum = new int[m];
         
-        int[][] dir = {{0,1},{0,-1},{1,0},{-1,0}};
+        int idx = 2;
+        Map<Integer, Integer> map = new HashMap<>();
         
-        boolean[][] visited = new boolean[n][m];
         for(int i=0;i<n;i++){
             for(int j=0;j<m;j++){
-                if(visited[i][j] || land[i][j]==0)
+                if(land[i][j]!=1)
                     continue;
                 
-                Queue<int[]> q = new ArrayDeque<>();
-                Set<Integer> set = new HashSet<>();
-                
+                Deque<int[]> q = new ArrayDeque<>();
                 q.add(new int[]{i,j});
-                visited[i][j] = true;
-                set.add(j);
-                int size = 0;
+                land[i][j] = idx;
+                int sum = 1;
                 
                 while(!q.isEmpty()){
                     int[] now = q.poll();
-                    size++;
+                    
                     for(int d=0;d<4;d++){
                         int tx = now[0] + dir[d][0];
                         int ty = now[1] + dir[d][1];
                         
-                        if(tx<0 || tx>=n || ty<0 || ty>=m || visited[tx][ty] || land[tx][ty] == 0)
+                        if(tx<0 || tx>=n || ty<0 || ty>=m || land[tx][ty]!=1)
                             continue;
                         
-                        visited[tx][ty] = true;
-                        if(!set.contains(ty))
-                            set.add(ty);
+                        sum++;
                         q.add(new int[]{tx,ty});
-                        
+                        land[tx][ty] = idx;
                     }
                 }
-                for(int next : set)
-                    sum[next] += size;
+                map.put(idx, sum);
+                idx++;
             }
         }
         
         for(int i=0;i<m;i++){
-            answer = Math.max(answer, sum[i]);
-            System.out.print(sum[i]+" ");
+            Set<Integer> s = new HashSet<>();
+            int temp = 0;
+            for(int j=0;j<n;j++){
+                if(land[j][i] >= 2 && !s.contains(land[j][i])){
+                    temp+=map.get(land[j][i]);
+                    s.add(land[j][i]);
+                }
+            }
+            answer = Math.max(answer, temp);
         }
+        
         return answer;
     }
 }
