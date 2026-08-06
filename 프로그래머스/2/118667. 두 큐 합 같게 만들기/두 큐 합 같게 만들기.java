@@ -17,8 +17,12 @@ class Solution {
             q2.offerLast(num);
         }
         
-        int idx = queue1.length + queue2.length;
-        for(int i=0;i<=idx+2;i++){
+        if ((sum1 + sum2) % 2 != 0) {
+            return -1;
+        }
+        
+        int idx = (queue1.length + queue2.length)*2;
+        for(int i=0;i<=idx;i++){
             if(sum1 == sum2){
                 return i;
             }
